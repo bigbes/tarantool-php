@@ -17,7 +17,9 @@ local compat = {
     string       = 'string',
 }
 
-if (tonumber(_TARANTOOL:split('-')[1]:split('.')[2]) < 7) then
+local version = fun.iter(_TARANTOOL:split('-')[1]:split('.')):map(tonumber):totable()
+
+if (version[1] == 1 and version[2] < 8) then
     compat.log          = 'logger'
     compat.memtx_memory = 'slab_alloc_arena'
     compat.unsigned     = 'NUM'

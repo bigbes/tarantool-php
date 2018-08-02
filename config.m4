@@ -10,6 +10,7 @@ if test "$PHP_TARANTOOL" != "no"; then
         src/tarantool_schema.c      \
         src/tarantool_proto.c       \
         src/tarantool_tp.c          \
+        src/tarantool_url_ext.c     \
         src/tarantool_exception.c   \
         src/utils.c                 \
         src/third_party/msgpuck.c   \

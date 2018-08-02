@@ -10,6 +10,7 @@
 #include <php_ini.h>
 #include <php_network.h>
 
+#include <ext/standard/url.h>
 #include <ext/standard/info.h>
 #include <ext/standard/base64.h>
 
@@ -95,10 +96,14 @@ ZEND_EXTERN_MODULE_GLOBALS(tarantool);
 
 typedef struct tarantool_object {
 	struct tarantool_connection  {
+		/*
 		char                    *host;
 		int                      port;
 		char                    *login;
 		char                    *passwd;
+		*/
+		char                    *url;
+		struct php_url          *url_parsed;
 		php_stream              *stream;
 		struct tarantool_schema *schema;
 		smart_string            *value;
@@ -106,7 +111,7 @@ typedef struct tarantool_object {
 		char                    *greeting;
 		char                    *salt;
 		/* Only for persistent connections */
-		char                    *orig_login;
+		char                    *orig_user;
 		char                    *suffix;
 		int                     suffix_len;
 		zend_string             *persistent_id;
